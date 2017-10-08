@@ -112,13 +112,13 @@ function parseTweetData(tweet, fs) {
             singleTweetObj.name = "Debris";
         }
 
-        if(false) {
-            exec('./damagerec.py '+singleTweetObj.img+' '+singleTweetObj.coordinates[0]+' '+singleTweetObj.coordinates[0], function(error,stdout,stderr) {
+        if(process.env.AI&&singleTweetObj.name===null) {
+            exec('python /home/ubuntu/data/classifyBasic.py '+singleTweetObj.img+' '+singleTweetObj.coordinates[0]+' '+singleTweetObj.coordinates[0], function(error,stdout,stderr) {
                 if(error) {
                     console.log(stderr);
                 }
                 else {
-                    singleTweetObj = stdout;
+                    singleTweetObj.name = stdout;
                 }
                 
             });
