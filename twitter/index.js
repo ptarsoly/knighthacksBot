@@ -12,15 +12,15 @@ var exec = require('child_process').exec;
 
 
 var secret = {
-    consumer_key: 'PGgGQwyimyvzLdAjDlnzzkt80',
-    consumer_secret: 'MYGn32buEn2GS4IK5hrI3BHlAMx4erVxF7GjpKLCzKL1c74h5s',
-    access_token_key: '916748173611323397-AiPaBEw6t3WLSmUEMsJJVHTlLc0IcOh',
-    access_token_secret: 'xO0IgQULH6fNFtV8eU7CpgbX7vsPM6J0W4H6lpnya4JnV'
+    consumer_key: 'FAp3i1AgjUj2Xs4Y0sxd2xNaq',
+    consumer_secret: '8wqoL2j3eKf6hC3TPff9PUiAksjaWNTClOfxnpHL13fGmxq9L8',
+    access_token_key: '917056593098878976-bEYRGCifjPkTGLPabpKP31r3kfRjb1D',
+    access_token_secret: 'u7Le9J74GqZpCDgP1aQv1bFan8daWm2ZJmtOw4ygTsFGY'
 };
 
 var client = new Twitter(secret);
 
-var twitterHandle = 'damage_portal';
+var twitterHandle = 'peeplaces';
 
 var tweets;
 
@@ -34,7 +34,7 @@ app.get('/data', (req, res) => {
 
 var incidents = 0;
 
-var filename = './twitter/tweetData.json';
+var filename = './twitter/peeData.json';
 
 fs.readFile(filename, 'utf8', (err, data) => {
     if (err) {
@@ -90,26 +90,31 @@ function parseTweetData(tweet, fs) {
         }
         
         var singleTweetObj = {
-            'name':null,
+            'classification':null,
             'date':tweet.created_at,
             'user': tweet.user.screen_name,
-            'message': tweet.text,
+            'rating': null,
+            'tweet': tweet.text,
             'img': tweet.entities.media[0].media_url,
             'coordinates': coords,
+            
         };
         
-
-        if(tweet.text.toLowerCase().search("flood")>-1) {
-            singleTweetObj.name = "Flooding";
+        if(tweet.text.search('1|2|3|4|5')>-1) {
+            singleTweetObj.rating = parseInt(tweet.text[tweet.text.search('1|2|3|4|5')]);
         }
-        else if((tweet.text.toLowerCase().search("fallen")>-1)&&(tweet.text.toLowerCase().search("tree")>-1)) {
-            singleTweetObj.name = "Fallen Tree";
+         // clean toilet, dirty toilet, urinal
+        if(tweet.text.toLowerCase().search("urinal")>-1) {
+            singleTweetObj.classification = "Urinal";
         }
-        else if((tweet.text.toLowerCase().search("down")>-1)&&((tweet.text.toLowerCase().search("power")>-1)||(tweet.text.toLowerCase().search("line")>-1))) {
-            singleTweetObj.name = "Downed Powerline";
+        else if((tweet.text.toLowerCase().search("clean")>-1)&&(tweet.text.toLowerCase().search("toilet")>-1)) {
+            singleTweetObj.classification = "Clean Toilet";
         }
-        else if(tweet.text.toLowerCase().search("debris")>-1) {
-            singleTweetObj.name = "Debris";
+        else if((tweet.text.toLowerCase().search("dirty")>-1)&&(tweet.text.toLowerCase().search("toilet")>-1)) {
+            singleTweetObj.classification = "Dirty Toilet";
+        }
+        else if((tweet.text.toLowerCase().search("no")>-1)&&(tweet.text.toLowerCase().search("toilet")>-1)) {
+            singleTweetObj.classification = "No Toilet";
         }
 
         if(false) {
@@ -137,7 +142,7 @@ function parseTweetData(tweet, fs) {
         });
     }
     else {
-        var tweetFinal = "@" + tweet.user.screen_name + " enable location services and tweet a pic of damage, with sharing your precise location";
+        var tweetFinal = "@" + tweet.user.screen_name + " enable location services and tweet a pic of the sanitary plumbing fixture, with sharing your precise location";
         client.post('statuses/update', { status: tweetFinal }, function (error, tweet, response) { //posts the response
             if (error) {
                 console.log(error);
@@ -146,7 +151,7 @@ function parseTweetData(tweet, fs) {
     }
 }
 
-setInterval(writeToJSON, 1000 * 30);
+setInterval(writeToJSON, 1000 * 10);
 
 function writeToJSON() {
     var json = JSON.stringify(tweets,null,"\t"); //convert it back to json
