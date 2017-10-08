@@ -65,6 +65,61 @@
 				-81.198385,
 				28.601544
 			]
+		},
+		{
+			"name": null,
+			"date": "Sun Oct 08 15:03:23 +0000 2017",
+			"user": "MuntaserSyed",
+			"message": "@damage_portal here I come https://t.co/HGzzUvYG1a",
+			"img": "http://pbs.twimg.com/media/DLn9f3HX0AAgt8J.jpg",
+			"coordinates": [
+				-81.198374,
+				28.601723
+			]
+		},
+		{
+			"name": "Flooding",
+			"date": "Sun Oct 08 15:35:14 +0000 2017",
+			"user": "MuntaserSyed",
+			"message": "@damage_portal heyoo flood https://t.co/Mqtw698qG6",
+			"img": "http://pbs.twimg.com/media/DLoEwqHUQAAKVno.jpg",
+			"coordinates": [
+				-81.187933,
+				28.6575085
+			]
+		},
+		{
+			"name": "Flooding",
+			"date": "Sun Oct 08 15:47:27 +0000 2017",
+			"user": "MuntaserSyed",
+			"message": "@damage_portal here's a flood https://t.co/0lYirDefd7",
+			"img": "http://pbs.twimg.com/media/DLoHj2IVAAA85lT.jpg",
+			"coordinates": [
+				-81.26783800000001,
+				28.694736000000002
+			]
+		},
+		{
+			"name": null,
+			"date": "Sun Oct 08 15:48:05 +0000 2017",
+			"user": "cwille12",
+			"message": "My power lines caught fire please send help I left my babies inside. @damage_portal https://t.co/Xjxjs6VOxc",
+			"img": "http://pbs.twimg.com/media/DLoHv-zVwAAcCJV.jpg",
+			"coordinates": [
+				-81.198074,
+				28.60292
+			]
+		},
+		{
+			"name": "Debris",
+			"date": "Sun Oct 08 15:52:02 +0000 2017",
+			"user": "cwille12",
+			"message": "Debris in the road @damage_portal https://t.co/7BGmPsvBVs",
+			"img": "http://pbs.twimg.com/media/DLoIpeNUIAUrLGJ.jpg",
+			"coordinates": [
+				-81.197666,
+				28.600602
+			]
 		}
 	]
 }

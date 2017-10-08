@@ -3,8 +3,10 @@ var fs = require('fs');
 var util = require('util');
 
 var express = require('express');
+var cors = require('cors');
 var app = express();
 
+app.use(cors())
 var sys = require('util')
 var exec = require('child_process').exec;
 
@@ -22,7 +24,7 @@ var twitterHandle = 'damage_portal';
 
 var tweets;
 
-app.listen(3000);
+app.listen(3001);
 
 app.get('/data', (req, res) => {
     res.send(JSON.stringify(tweets));
@@ -32,7 +34,7 @@ app.get('/data', (req, res) => {
 
 var incidents = 0;
 
-var filename = '/Users/petertarsoly/Desktop/knightHacks2k17/twitter/tweetData.json';
+var filename = './twitter/tweetData.json';
 
 fs.readFile(filename, 'utf8', (err, data) => {
     if (err) {
@@ -41,6 +43,7 @@ fs.readFile(filename, 'utf8', (err, data) => {
     else {
         tweets = JSON.parse(data);
         tweets.table = tweets.table || [];
+	incidents = tweets.table.length;
     }
 });
 
@@ -109,7 +112,7 @@ function parseTweetData(tweet, fs) {
             singleTweetObj.name = "Debris";
         }
 
-        if(!singleTweetObj) {
+        if(false) {
             exec('./damagerec.py '+singleTweetObj.img+' '+singleTweetObj.coordinates[0]+' '+singleTweetObj.coordinates[0], function(error,stdout,stderr) {
                 if(error) {
                     console.log(stderr);
