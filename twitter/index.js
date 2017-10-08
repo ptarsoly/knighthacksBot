@@ -52,7 +52,7 @@ function streamData(stream) {
     console.log("here");
     stream.on('data', function (event) {
         console.log(util.inspect(event, { depth: 7 }));
-        // parseTweetData(event, fs);
+        parseTweetData(event, fs);
     });
 
     stream.on('error', function (error) {
