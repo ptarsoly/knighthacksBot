@@ -117,13 +117,13 @@ function parseTweetData(tweet, fs) {
             singleTweetObj.classification = "No Toilet";
         }
 
-        if(false) {
-            exec('./damagerec.py '+singleTweetObj.img+' '+singleTweetObj.coordinates[0]+' '+singleTweetObj.coordinates[0], function(error,stdout,stderr) {
+        if(process.env.AI&&singleTweetObj.classification===null) {
+            exec('python /home/ubuntu/toiletdata/classifyToiletBasic.py '+singleTweetObj.img+' '+singleTweetObj.coordinates[0]+' '+singleTweetObj.coordinates[0], function(error,stdout,stderr) {
                 if(error) {
                     console.log(stderr);
                 }
                 else {
-                    singleTweetObj = stdout;
+                    singleTweetObj.classification = stdout;
                 }
                 
             });
